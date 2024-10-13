@@ -1,0 +1,101 @@
+/*Set before and after variables*/
+*, *::after, *::before {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: hsl(240, 3%, 7%);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 1em;
+    /*change font size dependant on screen size*/
+    font-size: clamp(.5rem, 2.5vmin, 1.5rem);
+}
+
+.gGrid {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    flex-grow: 1;
+    grid-template-columns: repeat(5, 4em);
+    grid-template-rows: repeat(6, 4em);
+    gap: .25em;
+    margin-bottom: 1em;
+}
+
+.tile {
+    font-size: 2em;
+    color: white;
+    border:  0.05em, solid hsl(240, 2%, 23%);
+}
+
+.keyboard {
+    display: grid;
+    grid-template-columns: repeat(20, minmax(auto,1.25em));
+    grid-auto-rows: 3em;
+    gap: .25em;
+    justify-content: center;
+}
+
+/*key buttons take up 2 grid places*/
+.key {
+    grid-column: span 2;
+}
+
+/*have the large keys take up 50% more space*/
+.keylG {
+    grid-column: span 3;
+}
+
+/*remove button styling and center content*/
+.key, .keylG {
+    font-size: inherit;
+    border: none;
+    border-radius: .25rem;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*using css variables to easily change color*/
+    background-color: hsl(
+        var(--hue, 200),
+        var(--saturation, 1%),
+        calc(var(--lightness-offset, 0%) +  var(--lightness, 51%))
+        );
+    color: white;
+    fill: white;
+    cursor: pointer;
+    user-select: none;
+}
+
+/*resize svg based on screen size*/
+.keylG > svg {
+    width: 1.75em;
+    height: 1.75em;
+}
+
+/*highlight key when hovered over*/
+.key:hover, .key:focus, .keylG.hover, .keylG.focus {
+   --lightness-offset: 10%; 
+}
+
+/*change button color is letter is not in word*/
+.key.wrong {
+    --lightness: 23%;
+}
+
+.key.present {
+    --hue: 49;
+    --saturation: 51%;
+    --lightness: 47%;  
+ }
+
+ .key.correct {
+    --hue: 115;
+    --saturation: 29%;
+    --lightness: 43%;  
+ }
+

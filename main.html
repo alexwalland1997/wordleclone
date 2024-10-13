@@ -4,8 +4,44 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Wordle Clone</title>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
+    <!--Grid where guesses will be shown-->
+    <div class="gGrid">
+       <div class="tile"></div>
+       <div class="tile"></div>
+       <div class="tile"></div>
+       <div class="tile"></div>
+       <div class="tile"></div>
+       <div class="tile"></div>
+       <div class="tile"></div>
+       <div class="tile"></div>
+       <div class="tile"></div>
+       <div class="tile"></div>
+       <div class="tile"></div>
+       <div class="tile"></div>
+       <div class="tile"></div>
+       <div class="tile"></div>
+       <div class="tile"></div>
+       <div class="tile"></div>
+       <div class="tile"></div>
+       <div class="tile"></div>
+       <div class="tile"></div>
+       <div class="tile"></div>
+       <div class="tile"></div>
+       <div class="tile"></div>
+       <div class="tile"></div>
+       <div class="tile"></div>
+       <div class="tile"></div>
+       <div class="tile"></div> 
+       <div class="tile"></div>
+       <div class="tile"></div>
+       <div class="tile"></div>
+       <div class="tile"></div>
+    </div>
+
+    <!--Keyboard buttons along with bigger buttons for enter and delete-->
     <div class="keyboard">
       <button class="key" data-key="Q">Q</button>
       <button class="key" data-key="W">W</button>
@@ -37,6 +73,7 @@
       <button class="key" data-key="N">N</button>
       <button class="key" data-key="M">M</button>
       <button class="keylG" data-delete>
+        <!--svg taken directly from wordle site-->
         <svg
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
