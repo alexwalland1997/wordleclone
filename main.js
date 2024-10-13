@@ -1,5 +1,6 @@
 let targetWord = "";
-let guessword="catch"
+let guessWord = "";
+const gGrid = document.querySelector("[data-guess-grid]");
 
 //get random word to be guessed
 async function getWord() {
@@ -93,6 +94,31 @@ function handleKey(e) {
         pressKey(e.key);
         return;
     } 
+}
+
+//adds letter to guess when clicked or pressed
+function pressKey(key) {
+    const activeTiles = aTiles();
+    //checks that we are not adding more letters than allowed
+    if (activeTiles.length >= 5) return;
+    const nextTile = gGrid.querySelector(":not([data-letter])");
+    nextTile.dataset.letter = key.toUpperCase();
+    nextTile.textContent = key;
+    nextTile.dataset.state = "active";
+}
+
+function deleteKey() {
+    const activeTiles = aTiles();
+    const lTile = activeTiles[activeTiles.length - 1];
+    if (lTile == null) return;
+    lTile.textContent = "";
+    delete lTile.dataset.state;
+    delete lTile.dataset.letter;
+}
+
+//returns all active tiles
+function aTiles() {
+    return gGrid.querySelectorAll('[data-state="active"]');
 }
 
 getWord();
