@@ -74,7 +74,8 @@ function handleClick(e) {
         checkGuess();
         return;
       } 
-      console.log("not long enough");
+      showAlert("Invalid guess");
+      shakeTiles(activeTiles);
     }
 
     if (e.target.matches("[data-delete]")) {
@@ -91,7 +92,8 @@ function handleKey(e) {
         checkGuess();
         return;
       }
-      console.log("not long enough");
+      showAlert("Invalid guess");
+      shakeTiles(activeTiles);
     }
 
     if (e.key ==="Backspace" || e.key === "Delete") {
