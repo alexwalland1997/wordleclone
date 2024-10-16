@@ -29,6 +29,7 @@ async function checkWord(word) {
       getWord();
     }
     const json = await response.json();
+    startInteraction();
   } catch (error) {
     getWord();
   }
@@ -66,10 +67,14 @@ function handleClick(e) {
         pressKey(e.target.dataset.key);
         return
     }
-
+    //checks that right number of letters have been entered
     if (e.target.matches("[data-enter]")) {
+      const activeTiles = aTiles();
+      if (activeTiles.length == 5) {
         checkGuess();
         return;
+      } 
+      console.log("not long enough");
     }
 
     if (e.target.matches("[data-delete]")) {
@@ -81,8 +86,12 @@ function handleClick(e) {
 //performs function depending on what player has pressed on keyboard
 function handleKey(e) {
     if (e.key ==="Enter") {
+      const activeTiles = aTiles();
+      if (activeTiles.length == 5) {
         checkGuess();
         return;
+      }
+      console.log("not long enough");
     }
 
     if (e.key ==="Backspace" || e.key === "Delete") {
@@ -122,4 +131,3 @@ function aTiles() {
 }
 
 getWord();
-startInteraction();
