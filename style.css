@@ -33,6 +33,12 @@ body {
     padding: .75em;
     border-radius:.25em ;
     opacity: 1;
+    transition: opacity 500ms ease-in-out;
+    margin-bottom: .5em;
+}
+
+.alert:last-child {
+    margin-bottom: 0;
 }
 
 .alert.hide {
@@ -62,6 +68,36 @@ body {
     justify-content: center;
     align-items: center;
     user-select: none;
+}
+
+.tile.shake {
+    animation: shake 250ms ease-in-out;
+}
+
+@keyframes shake {
+    10% {
+        transform: translateX(-5%);
+    }
+
+    30% {
+        transform: translateX(5%);
+    }
+
+    50% {
+        transform: translateX(-7.5%);
+    }
+
+    70% {
+        transform: translateX(7.5%);
+    }
+
+    90% {
+        transform: translateX(5%);
+    }
+
+    100% {
+        transform: translateX(0%);
+    }
 }
 
 /*styling tiles based on guess*/
