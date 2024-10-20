@@ -1,5 +1,5 @@
-let targetWord = "";
-let guessWord = "";
+var targetWord;
+var cState = ["0","0","0","0","0"];
 const gGrid = document.querySelector("[data-guess-grid]");
 const aContainer = document.querySelector("[data-alert-container]");
 const keyboard = document.querySelector("[data-keyboard]");
@@ -32,6 +32,7 @@ async function checkWord(word) {
       getWord();
     }
     const json = await response.json();
+    console.log(word);
     startInteraction();
     targetWord = word;
   } catch (error) {
@@ -42,7 +43,7 @@ async function checkWord(word) {
 //checks player guess is valid word
 async function checkGuess() {
   const activeTiles = [...aTiles()];
-
+  cState = ["0","0","0","0","0"];
   const guess = activeTiles.reduce((word, tile) =>{
     return word + tile.dataset.letter;
   }, "")
@@ -51,12 +52,14 @@ async function checkGuess() {
   try {
     const response = await fetch(url);
     if (!response.ok) {
-      showAlert("Not a valid word");
-      return
+      showAlert("Not a valid word", 500);
+      return;
     }
-
+    
     stopInteraction();
+    compareGuess(guess);
     activeTiles.forEach((...params) => flipTile(...params, guess));
+    
   } catch (error) {}
 }
 
@@ -85,7 +88,7 @@ function handleClick(e) {
       checkGuess();
       return;
     }
-    showAlert("Invalid guess");
+    showAlert("Invalid guess", 500);
     shakeTiles(activeTiles);
   }
 
@@ -103,7 +106,7 @@ function handleKey(e) {
       checkGuess();
       return;
     }
-    showAlert("Invalid guess");
+    showAlert("Invalid guess", 500);
     shakeTiles(activeTiles);
   }
 
@@ -144,7 +147,7 @@ function aTiles() {
 }
 
 //shows alert on screen at top of element then once faded out removed from page
-function showAlert(message, duration = 1000) {
+function showAlert(message, duration) {
   const alert = document.createElement("div");
   alert.textContent = message;
   alert.classList.add("alert");
@@ -174,10 +177,69 @@ function shakeTiles(tiles) {
 
 function flipTile(tile, index, array, guess) {
   const letter = tile.dataset.letter;
-  const key = keyboard.querySelector(`[data-key="${letter}"]`);
+  const key = keyboard.querySelector(`[data-key="${letter}"i]`);
   setTimeout(() => {
-
+    tile.classList.add("flip");
   }, index * FLIP_ANIMATION_DURATION/2 )
+  tile.addEventListener("transitionend", () => {
+    tile.classList.remove("flip");
+    if (cState[index] === "0") {
+      tile.dataset.state = "wrong";
+      key.classList.add("wrong");
+    } 
+    else if (cState[index] === "1") {
+      tile.dataset.state = "correct";
+      key.classList.add("correct");
+    }
+    else if (cState[index] === "2") {
+      tile.dataset.state = "wposition";
+      key.classList.add("present");
+    }
+
+    if (index === array.length - 1) {
+      tile.addEventListener("transitionend", () => {
+        checkWinLose(array);
+        startInteraction();
+      }, {once : true})
+    }
+      
+  }, {once : true})
+}
+
+function checkWinLose(tiles) {
+  if (cState.includes("0") || cState.includes("0")) {
+
+  } else {
+    showAlert("You win", 5000);
+    danceTiles(tiles);
+    stopInteraction();
+  }
+}
+
+//checks guess against target word and changes target word to prevent dupe letters showing as correct/in word
+function compareGuess(guess) {
+  //split guess and target word into array
+  let Gguess = guess.split("");
+  var tWord = targetWord[0].split("");
+
+  //compare arrays to see if letters in same position
+  for(let i = 0; i<tWord.length; i++) {
+    if (Gguess[i] === tWord[i].toUpperCase()) {
+      tWord[i] ="1";
+      cState[i] = "1";
+    }
+  }
+
+  //check target word to see if word from guess is there
+  for (let i = 0; i < tWord.length; i++) {
+    for (let x = 0; x < tWord.length; x++) {
+      if (Gguess[i] === tWord[x].toUpperCase()) {
+          tWord[i] = "2";
+          cState[i] = "2";
+          x = 5;
+        }
+      }
+    }
 }
 
 getWord();

@@ -68,10 +68,15 @@ body {
     justify-content: center;
     align-items: center;
     user-select: none;
+    transition: transform 250ms linear;
 }
 
 .tile.shake {
     animation: shake 250ms ease-in-out;
+}
+
+.tile.flip {
+    transform: rotateX(90deg);
 }
 
 @keyframes shake {
@@ -107,7 +112,7 @@ body {
 
 .tile[data-state="wrong"] {
     border: none;
-    background-color: hsl(240, 2%, 23%);
+    background-color: hsl(240, 2%, 32%);
 }
 
 .tile[data-state="wposition"] {
