@@ -238,7 +238,7 @@ function compareGuess(guess) {
   for (let i = 0; i < tWord.length; i++) {
     for (let x = 0; x < tWord.length; x++) {
       if (Gguess[i] === tWord[x].toUpperCase()) {
-          tWord[i] = "2";
+          tWord[x] = "2";
           cState[i] = "2";
           x = 5;
         }
