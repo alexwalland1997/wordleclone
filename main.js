@@ -198,8 +198,8 @@ function flipTile(tile, index, array, guess) {
 
     if (index === array.length - 1) {
       tile.addEventListener("transitionend", () => {
-        checkWinLose(array);
         startInteraction();
+        checkWinLose(array);
       }, {once : true})
     }
       
@@ -207,12 +207,16 @@ function flipTile(tile, index, array, guess) {
 }
 
 function checkWinLose(tiles) {
+  const remainingTiles = gGrid.querySelectorAll(":not([data-letter])");
   if (cState.includes("0") || cState.includes("0")) {
-
+    if (remainingTiles.length === 0) {
+      showAlert(targetWord[0].toUpperCase(), null);
+      stopInteraction();
+    }
   } else {
     showAlert("You win", 5000);
-    danceTiles(tiles);
     stopInteraction();
+    danceTiles(tiles);
   }
 }
 
@@ -240,6 +244,21 @@ function compareGuess(guess) {
         }
       }
     }
+}
+
+function danceTiles(tiles) {
+  tiles.forEach((tile, index) => {
+    setTimeout(() => {
+     tile.classList.add("dance");
+     tile.addEventListener(
+      "animationend",
+      () => {
+        tile.classList.remove("dance");
+      },
+      { once: true }
+    );
+  }, index * FLIP_ANIMATION_DURATION / 5);
+});
 }
 
 getWord();
