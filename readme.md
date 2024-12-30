@@ -23,7 +23,7 @@
   
   Used tutorial from webdevsimplified - https://www.youtube.com/watch?v=Wak7iN4JZzU&list=WL&index=2&t=3139s&ab_channel=WebDevSimplified provided the base but various alterations made to incorporate APIs and the word check
   
-      ## License
+  ## License
     *The project is protected by the following license*
   
     The Unlicense
