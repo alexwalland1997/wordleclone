@@ -16,7 +16,9 @@
     ## Installation
     *Instructions on how to install the project and run it*
   
-  download the package and open the main.html to test if you wish to play again just refresh the page
+  Download the package and open the main.html to test if you wish to play again just refresh the page when playing the site should look like the following
+
+  ![alt text](/images/wordle.png)
 
      ## Credit
     *All sources used to help with this project*
