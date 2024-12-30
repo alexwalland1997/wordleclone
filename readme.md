@@ -4,7 +4,6 @@
 * [Description](#description) 
 * [Installation](#installation) 
 * [Credit](#credit) 
-* [Tests](#tests) 
 * [License](#license) 
 * [Contact](#contact) 
 
@@ -17,14 +16,13 @@
     ## Installation
     *Instructions on how to install the project and run it*
   
-      download the packafe and open the main.html to test if you wish to play again just refresh the page## Credit
+  download the package and open the main.html to test if you wish to play again just refresh the page
+
+     ## Credit
     *All sources used to help with this project*
   
-      Used tutorial from webdevsimplified - https://www.youtube.com/watch?v=Wak7iN4JZzU&list=WL&index=2&t=3139s&ab_channel=WebDevSimplified provided the base but various alterations made to incorporate APIs and the word check
-      ## Tests
-    *The following are tests that I have run on this project*
+  Used tutorial from webdevsimplified - https://www.youtube.com/watch?v=Wak7iN4JZzU&list=WL&index=2&t=3139s&ab_channel=WebDevSimplified provided the base but various alterations made to incorporate APIs and the word check
   
-      undefined
       ## License
     *The project is protected by the following license*
   
